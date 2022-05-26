@@ -1,0 +1,17 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.llw.dao.UserDao">
+    <resultMap id="userResultMap"	type="com.llw.model.User">
+        <id property="id" column="id" jdbcType="INTEGER" />
+        <result property="account" column="account" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="createDate" column="createDate" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="createUser" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="updateDate" jdbcType="TIMESTAMP"/>
+        <result property="updateUser" column="updateUser" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="findByAccount" resultMap="userResultMap">
+        select E.* from user E where E.account = #{account}
+    </select>
+</mapper>
