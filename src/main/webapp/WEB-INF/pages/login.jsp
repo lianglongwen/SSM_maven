@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>登录</title>
-    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
 </head>
 <script type="text/javascript">
     function judegUser() {
@@ -15,7 +15,7 @@
         var result = false;
         $.ajax({
             type:"post",
-            url:"user/login",
+            url:"<%=request.getContextPath()%>/user/loginYz",
             data:{"account":account,"password":password},
             dataType:"json",
             async:false,
@@ -34,7 +34,7 @@
     }
 </script>
 <body>
-<form action="user/index" method="post" onsubmit="return judegUser()">
+<form action="<%=request.getContextPath()%>/user/admin" method="post" onsubmit="return judegUser();">
     <table>
         <tr>
             <td>用户名：</td>

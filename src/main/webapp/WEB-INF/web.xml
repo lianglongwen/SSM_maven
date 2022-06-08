@@ -26,6 +26,10 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>dispatcherServlet</servlet-name>
+    <url-pattern>/user/index</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcherServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   <!--配置解决中文乱码过滤器-->
@@ -42,6 +46,6 @@
     <url-pattern>/</url-pattern>
   </filter-mapping>
   <welcome-file-list>
-    <welcome-file>login.jsp</welcome-file>
+    <welcome-file>user/index</welcome-file>
   </welcome-file-list>
 </web-app>

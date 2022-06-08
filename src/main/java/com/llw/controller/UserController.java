@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 
 @Controller
@@ -20,6 +19,13 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/login")
+    public String goLogin(HttpServletRequest request, Model model){
+        String account = request.getParameter("account");
+        User user = userService.findByAccount(account);
+        model.addAttribute("user",user);
+        return "login";
+    }
+    @RequestMapping("/loginYz")
     @ResponseBody
     public byte[] findUser(HttpServletRequest request) throws UnsupportedEncodingException {
         JSONObject jsonObject = new JSONObject();
@@ -29,17 +35,26 @@ public class UserController {
         if(user==null){
             jsonObject.put("code",404);
             jsonObject.put("message","用户名不存在！");
+            return jsonObject.toJSONString().getBytes("utf-8");
         }
         //判断密码是否相等
         if(user.getPassword().equals(password)){
             //返回首页
             jsonObject.put("code",200);
+            request.getSession().setAttribute("account",account);
         }else{
             //返回输入页面，并提示
             jsonObject.put("code",502);
             jsonObject.put("message","密码错误！");
         }
         return jsonObject.toJSONString().getBytes("utf-8");
+    }
+    @RequestMapping("/admin")
+    public String goAdmin(HttpServletRequest request, Model model){
+        String account = request.getParameter("account");
+        User user = userService.findByAccount(account);
+        model.addAttribute("user",user);
+        return "admin";
     }
     @RequestMapping("/index")
     public String goIndex(HttpServletRequest request, Model model){
