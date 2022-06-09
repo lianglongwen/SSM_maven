@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.llw.model.Shop" %>
+<%@ page import="java.util.*" %><%--
   Created by IntelliJ IDEA.
   User: gzgi_admin
   Date: 2022/6/8
@@ -56,29 +57,24 @@
 <%if (request.getSession().getAttribute("account")==null){%>
 <a href="<%=request.getContextPath()%>/user/login">登录</a>
 <%}else{%>
-<a>注销</a>
+<%=request.getSession().getAttribute("account")%>&nbsp;&nbsp;
+<a href="<%=request.getContextPath()%>/user/admin">返回后台</a> &nbsp;&nbsp;
+<a>注销</a>&nbsp;&nbsp;
 <%}%>
-<%=request.getSession().getAttribute("account")%>
 <div>
     <ul id="shops" class="shops">
+        <%List<Shop> list = (List<Shop>) request.getAttribute("shops");
+          for (Shop shop :list) {%>
         <li class="shop">
             <%--左边显示店铺招牌--%>
-            <div class="shop_left"><img src="<%=request.getContextPath()%>/images/chabaidao.jpg"></div>
+            <div class="shop_left"><img src="<%=request.getContextPath()%>/<%=shop.getImagePath()%>"></div>
             <%--右边显示店铺名称及介绍--%>
             <div class="shop_right">
-                <p class="shop_right_top">茶百道（大石店）</p>
-                <p class="shop_right_bottom">买一送一，赶紧来喝</p>
+                <p class="shop_right_top"><%=shop.getName()%></p>
+                <p class="shop_right_bottom"><%=shop.getIntroduce()%></p>
             </div>
         </li>
-        <li class="shop">
-            <%--左边显示店铺招牌--%>
-            <div class="shop_left"><img src="<%=request.getContextPath()%>/images/chabaidao.jpg"></div>
-            <%--右边显示店铺名称及介绍--%>
-            <div class="shop_right">
-                <p class="shop_right_top">茶百道（大石店）</p>
-                <p class="shop_right_bottom">买一送一，赶紧来喝</p>
-            </div>
-        </li>
+          <%}%>
     </ul>
 </div>
 </body>

@@ -1,7 +1,9 @@
 package com.llw.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.llw.model.Shop;
 import com.llw.model.User;
+import com.llw.service.ShopService;
 import com.llw.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,12 +13,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private ShopService shopService;
 
     @RequestMapping("/login")
     public String goLogin(HttpServletRequest request, Model model){
@@ -61,6 +66,9 @@ public class UserController {
         String account = request.getParameter("account");
         User user = userService.findByAccount(account);
         model.addAttribute("user",user);
+        //获取店铺信息，将店铺信息传给前台
+        List<Shop> list = shopService.getAllShop();
+        model.addAttribute("shops",list);
         return "index";
     }
 }

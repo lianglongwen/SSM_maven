@@ -7,7 +7,7 @@
     <script src="/ssm/js/jquery-3.2.1.min.js"></script>
 </head>
 <%
-    User user = (User)request.getAttribute("user");
+    String account = request.getSession().getAttribute("account")==null?"":(String) request.getSession().getAttribute("account");
 %>
 <script>
     var contextPath="<%=request.getContextPath()%>";
@@ -16,7 +16,11 @@
     }
 </script>
 <body>
-<h1>欢迎您<%=user.getName()%></h1>
+<h1>欢迎您<%=account%></h1>
+<%if (account.equals("root")){%>
+<a href="<%=request.getContextPath()%>/shop/addPage">增加店铺</a>
+<a href="#">增加商品</a>
+<%}%>
 <a href="<%=request.getContextPath()%>/user/index">返回首页</a>
 </body>
 </html>
