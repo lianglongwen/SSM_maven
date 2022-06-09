@@ -51,6 +51,10 @@
         color: gray;
         margin: 10px;
     }
+    #shops .shop .shop_right a{
+        font-size: 12px;
+        margin: 10px;
+    }
 </style>
 <body>
 <h1>这是首页</h1>
@@ -72,6 +76,7 @@
             <div class="shop_right">
                 <p class="shop_right_top"><%=shop.getName()%></p>
                 <p class="shop_right_bottom"><%=shop.getIntroduce()%></p>
+                <a href="#">删除店铺</a>
             </div>
         </li>
           <%}%>
