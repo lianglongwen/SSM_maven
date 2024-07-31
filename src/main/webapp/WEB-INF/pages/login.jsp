@@ -35,6 +35,7 @@
 </script>
 <body>
 <form action="<%=request.getContextPath()%>/user/admin" method="post" onsubmit="return judegUser();">
+    <h2>学生管理系统</h2>
     <table>
         <tr>
             <td>用户名：</td>

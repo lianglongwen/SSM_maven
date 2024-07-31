@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
@@ -62,13 +63,15 @@ public class UserController {
         return "admin";
     }
     @RequestMapping("/index")
-    public String goIndex(HttpServletRequest request, Model model){
+    public ModelAndView goIndex(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
         String account = request.getParameter("account");
         User user = userService.findByAccount(account);
-        model.addAttribute("user",user);
+        modelAndView.addObject("user",user);
         //获取店铺信息，将店铺信息传给前台
         List<Shop> list = shopService.getAllShop();
-        model.addAttribute("shops",list);
-        return "index";
+        modelAndView.addObject("shops",list);
+        modelAndView.setViewName("login");
+        return modelAndView;
     }
 }
